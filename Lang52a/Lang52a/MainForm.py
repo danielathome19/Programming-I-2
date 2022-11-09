@@ -7,6 +7,7 @@ from System.Windows.Forms import *
 class MainForm(Form):
 	def __init__(self):
 		self.InitializeComponent()
+		self.testx = 5
 	
 	def InitializeComponent(self):
 		self._label1 = System.Windows.Forms.Label()
