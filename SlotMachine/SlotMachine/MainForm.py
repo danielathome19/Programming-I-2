@@ -7,6 +7,9 @@ from System.Windows.Forms import *
 class MainForm(Form):
 	def __init__(self):
 		self.InitializeComponent()
+		self.num1 = 0
+		self.num2 = 0
+		self.num3 = 0
 	
 	def InitializeComponent(self):
 		self._components = System.ComponentModel.Container()
@@ -232,6 +235,10 @@ class MainForm(Form):
 		self._pictureBox11.TabStop = False
 		self._pictureBox11.Visible = False
 		# 
+		# timer1
+		# 
+		self._timer1.Tick += self.Timer1Tick
+		# 
 		# MainForm
 		# 
 		self.ClientSize = System.Drawing.Size(1149, 672)
@@ -314,20 +321,83 @@ class MainForm(Form):
 			self._timer1.Enabled = True
 			self._progressBar1.Value = 0
 			
-			"""
 			num1 = self.num1
 			num2 = self.num2
 			num3 = self.num3
-			"""
 			
-			"""Change to +="""
 			if num1 == 1 and num2 == 1 and num3 == 1:
-				money2 = bet * 2
+				money2 += bet * 2
 				
 			if num1 == 2 and num2 == 2 and num3 == 2:
-				money2 = bet * 2
+				money2 += bet * 2
 			
 			# Check if num1, num2, and num3 equal 3, 4, and 5
 			# and multiply bet by whatever you want
 			if num1 == 5 and num2 == 5 and num3 == 5:
-				money2 = bet * 100
+				money2 += bet * 100
+			
+			self.num1 = 0
+			self.num2 = 0
+			self.num3 = 0
+			self._label2.Text = str(round(money2, 2))
+			
+			if money2 == 0:
+				MessageBox.Show("You've ran out of cash!")
+
+
+	def Timer1Tick(self, sender, e):
+		im1 = self._pictureBox5.Image
+		im2 = self._pictureBox6.Image
+		im3 = self._pictureBox7.Image
+		im4 = self._pictureBox8.Image
+		im5 = self._pictureBox9.Image
+		levOff = self._pictureBox10.Image
+		levOn = self._pictureBox11.Image
+		rnd = System.Random()
+		num1 = 0
+		num2 = 0
+		num3 = 0
+		# Copied from Button1Click
+		
+		pb1 = self._pictureBox1
+		pb2 = self._pictureBox2
+		pb3 = self._pictureBox3
+		
+		for lcv in range(1, 1000):
+			num1 = rnd.Next(1, 6)
+			num2 = rnd.Next(1, 6)
+			num3 = rnd.Next(1, 6)
+			
+			self.num1 = num1
+			self.num2 = num2
+			self.num3 = num3
+			
+			# Do the same for num2/pb2 and num3/pb3
+			if num1 == 1:
+				pb1.Image = im1
+			elif num1 == 2:
+				pb1.Image = im2
+			elif num1 == 3:
+				pb1.Image = im3
+			elif num1 == 4:
+				pb1.Image = im4
+			elif num1 == 5:
+				pb1.Image = im5
+			
+			if num2 == 1:
+				pb2.Image = im1
+			elif num2 == 2:
+				pb2.Image = im2
+			elif num2 == 3:
+				pb2.Image = im3
+			elif num2 == 4:
+				pb2.Image = im4
+			elif num2 == 5:
+				pb2.Image = im5
+				
+			# Need to finish num3/pb3
+			self._progressBar1.Increment(1)
+			if self._progressBar1.Value == self._progressBar1.Maximum:
+				self._timer1.Enabled = False
+				self._button1.BackgroundImage = levOff
+				self._pictureBox4.Visible = False
