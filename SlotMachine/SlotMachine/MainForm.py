@@ -314,6 +314,13 @@ class MainForm(Form):
 			self._timer1.Enabled = True
 			self._progressBar1.Value = 0
 			
+			"""
+			num1 = self.num1
+			num2 = self.num2
+			num3 = self.num3
+			"""
+			
+			"""Change to +="""
 			if num1 == 1 and num2 == 1 and num3 == 1:
 				money2 = bet * 2
 				
