@@ -105,6 +105,10 @@ class MainForm(Form):
 		self._timerball.Interval = 20
 		self._timerball.Tick += self.TimerballTick
 		# 
+		# timermulti
+		# 
+		self._timermulti.Interval = 20
+		# 
 		# MainForm
 		# 
 		self.BackColor = System.Drawing.Color.Black
@@ -127,9 +131,78 @@ class MainForm(Form):
 		pass
 
 	def MainFormKeyDown(self, sender, e):
-		pass
+		tball = self._timerball
+		tdum = self._timerdummy
+		tbool = self._timerboolean
+		tmult = self._timermulti
+		tleft = self._timerleft
+		tright = self._timerright
+		bl = self._lblball
+		lblf = self._lblleft
+		lbrt = self._lblright
+		
+		def reset():
+			self._lbltitle.Visible = True
+			self._lbltitle.Text = "Press Enter to start or M to start Multiplayer"
+			self._leftscore.Text = "0"
+			self._rightscore.Text = "0"
+			tball.Enabled = False
+			tdum.Enabled = False
+			tbool.Enabled = False
+			tmult.Enabled = False
+			tleft.Enabled = False
+			tright.Enabled = False
+			bl.Left = self.Width // 2
+			bl.Top = self.Height // 2
+			lblf.Top = (self.Height // 2) - 100 + self._lblleft.Height
+			lbrt.Top = (self.Height // 2) - 100 + self._lblright.Height
+			""" TODO: RESET SECRETS """
+			bl.BackColor = Color.White
+		
+		if e.KeyCode == Keys.R:
+			reset()
+		
+		""" TODO: ADD SECRET CONTROL """
+		
+		if e.KeyCode == Keys.Enter:
+			tball.Enabled = True
+			self._lbltitle.Visible = False
+			tdum.Enabled = True
+			tbool.Enabled = True
+		
+		if e.KeyCode == Keys.M:
+			reset()
+			self._lbltitle.Visible = True
+			self._lbltitle.Text = "Use W and S to move the left paddle; hit Enter to begin"
+			tmult.Enabled = True
+			if e.KeyCode == Keys.Enter:
+				self._lbltitle.Visible = False
+				tball.Enabled = True
+				tdum.Enabled = True
+				tmult.Enabled = True
+				tbool.Enabled = False
+		
+		if tdum.Enabled:
+			if e.KeyCode == Keys.Up:
+				self.flagright = False
+				tright.Enabled = True
+			elif e.KeyCode == Keys.Down:
+				self.flagright = True
+				tright.Enabled = True
+			elif tright.Enabled == True and self.flagright == False:
+				tright.Enabled = False
+		
+		""" TODO: FINISH MULTIPLAYER CONTROLS """
+		if tmult.Enabled and tball.Enabled:
+			""" FOR BOTH KEYS, ALSO NEED TO SET tbool.Enabled = False """
+			if e.KeyCode == Keys.W:
+				pass
+			if e.KeyCode == Keys.S:
+				pass
 
 	def MainFormLoad(self, sender, e):
+		""" TODO: ADD 3 UNIQUE SECRETS/CHEATS/EASTER EGGS
+		IN TOTAL AND FINISH MULTIPLAYER AND SCOREBOARD """
 		self.balld = 1
 		self.ballup = self.R.Next(-4, 5)
 		self._timerball.Enabled = False
@@ -161,4 +234,4 @@ class MainForm(Form):
 
 	def LblballClick(self, sender, e):
 		self._lblball.BackColor = Color.Red
-		""" PUT MORE SECRETS BELOW """
+		""" TODO: PUT MORE SECRETS BELOW """
