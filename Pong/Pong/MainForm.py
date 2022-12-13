@@ -215,9 +215,9 @@ class MainForm(Form):
 		if flagd == False:
 			pdl.Top -= 5
 		if pdl.Top <= 10:
-			tmr.Enable = False
+			tmr.Enabled = False
 		if pdl.Bottom >= self.Height - 50:
-			tmr.Enable = False
+			tmr.Enabled = False
 
 	def TimerrightTick(self, sender, e):
 		self.pdlTick(self._lblright, self.flagright, self._timerright)
