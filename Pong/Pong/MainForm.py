@@ -131,14 +131,17 @@ class MainForm(Form):
 		ball = self._lblball
 		lpdl = self._lblleft
 		rpdl = self._lblright
-		ball.Top += 8 * self.balld
+		ball.Top += self.ballup
+		ball.Left += 8 * self.balld
 		rscore = int(self._rightscore.Text)
 		lscore = int(self._leftscore.Text)
 		
-		if ball.Right >= rpdl.Left and ball.Bottom >= rpdl.Top and ball.Top <= rpdl.Bottom:
+		if ball.Right >= rpdl.Left and \
+		  ball.Bottom >= rpdl.Top and ball.Top <= rpdl.Bottom:
 			self.balld = -1
 			self.ballup = self.R.Next(-4, 5)
-		elif ball.Left <= lpdl.Right and ball.Bottom >= lpdl.Top and ball.Top <= lpdl.Bottom:
+		elif ball.Left <= lpdl.Right and \
+		  ball.Bottom >= lpdl.Top and ball.Top <= lpdl.Bottom:
 			self.balld = 1
 			self.ballup = self.R.Next(-4, 5)
 		
@@ -151,18 +154,18 @@ class MainForm(Form):
 			ball.Top += 5 * self.balld
 		
 		if ball.Location.X <= 0 or \
-			(ball.Location.X < lpdl.Left + 20 and ball.Location.Y < lpdl.Top):
+		  (ball.Location.X < lpdl.Left + 20 and ball.Location.Y < lpdl.Top):
 			pass
 			""" TODO: FINISH LEFT BOUNDARY """
 		
 		if ball.Location.X >= self.Width or \
-			(ball.Location.X > rpdl.Right + 20 and ball.Location.Y > rpdl.Height):
-			lscore += 1
+		  (ball.Location.X > rpdl.Right + 20 and ball.Location.Y > lpdl.Height):
+			lscore = lscore + 1
 			ball.Left = self.Width // 2
 			ball.Top = self.Height // 2
 			self._leftscore.Text = str(lscore)
 		
-		""" TODO: FINISH RIGHT SCORE WIN CONDITION """
+		""" TODO: RIGHT SCORE WIN CONDITION """
 		
 		if lscore == 10:
 			self._timerball.Enabled = False
@@ -183,7 +186,7 @@ class MainForm(Form):
 			self.ballup = -1
 		
 		""" TODO: ? """
-		if self._timerboolean.Enabled:
+		if self._timerboolean.Enabled == True:
 			lpdl.Top = ball.Top - 20
 		   	
 
