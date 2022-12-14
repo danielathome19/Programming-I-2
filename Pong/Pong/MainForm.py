@@ -159,7 +159,7 @@ class MainForm(Form):
 			""" TODO: FINISH LEFT BOUNDARY """
 		
 		if ball.Location.X >= self.Width or \
-		  (ball.Location.X > rpdl.Right + 20 and ball.Location.Y > lpdl.Height):
+		  (ball.Location.X > rpdl.Right + 20 and ball.Location.Y > rpdl.Height):
 			lscore = lscore + 1
 			ball.Left = self.Width // 2
 			ball.Top = self.Height // 2
