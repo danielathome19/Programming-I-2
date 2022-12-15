@@ -114,9 +114,9 @@ class MainForm(Form):
 		self.BackColor = System.Drawing.Color.Black
 		self.ClientSize = System.Drawing.Size(982, 590)
 		self.Controls.Add(self._lblright)
-		self.Controls.Add(self._rightscore)
 		self.Controls.Add(self._lblleft)
 		self.Controls.Add(self._lblball)
+		self.Controls.Add(self._rightscore)
 		self.Controls.Add(self._leftscore)
 		self.Controls.Add(self._lbltitle)
 		self.Name = "MainForm"
